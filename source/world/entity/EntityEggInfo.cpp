@@ -16,18 +16,18 @@ void EntityEggInfo::_addEgg(EntityType::ID spawnedType, const Color& primaryColo
 
 void EntityEggInfo::initEggs()
 {
-	_addEgg(EntityType::CREEPER,    Color::FromRGB(0x0D, 0xA7, 0x0B), Color::FromRGB(0x00, 0x00, 0x00));
-	_addEgg(EntityType::SKELETON,   Color::FromRGB(0xC1, 0xC1, 0xC1), Color::FromRGB(0x49, 0x49, 0x49));
-	_addEgg(EntityType::SPIDER,     Color::FromRGB(0x34, 0x2D, 0x26), Color::FromRGB(0xA8, 0x0E, 0x0E));
-	_addEgg(EntityType::ZOMBIE,     Color::FromRGB(0x00, 0xAF, 0xAF), Color::FromRGB(0x79, 0x9C, 0x65));
-	_addEgg(EntityType::SLIME,      Color::FromRGB(0x51, 0xA0, 0x3E), Color::FromRGB(0x7E, 0xBF, 0x6E));
-	_addEgg(EntityType::GHAST,      Color::FromRGB(0xF9, 0xF9, 0xF9), Color::FromRGB(0xBC, 0xBC, 0xBC));
-	_addEgg(EntityType::PIG_ZOMBIE, Color::FromRGB(0xEA, 0x93, 0x93), Color::FromRGB(0x4C, 0x71, 0x29));
-	_addEgg(EntityType::PIG,        Color::FromRGB(0xF0, 0xA5, 0xA2), Color::FromRGB(0xDB, 0x63, 0x5F));
-	_addEgg(EntityType::SHEEP,      Color::FromRGB(0xE7, 0xE7, 0xE7), Color::FromRGB(0xFF, 0xB5, 0xB5));
-	_addEgg(EntityType::COW,        Color::FromRGB(0x44, 0x36, 0x26), Color::FromRGB(0xA1, 0xA1, 0xA1));
-	_addEgg(EntityType::CHICKEN,    Color::FromRGB(0xA1, 0xA1, 0xA1), Color::FromRGB(0xFF, 0x00, 0x00));
-	_addEgg(EntityType::SQUID,      Color::FromRGB(0x22, 0x3B, 0x4D), Color::FromRGB(0x70, 0x88, 0x99));
+	_addEgg(EntityType::CREEPER,    Color::FromRGB(13, 167, 11), Color::FromRGB(0, 0, 0));
+	_addEgg(EntityType::SKELETON,   Color::FromRGB(193, 193, 193), Color::FromRGB(73, 73, 73));
+	_addEgg(EntityType::SPIDER,     Color::FromRGB(52, 45, 38), Color::FromRGB(168, 14, 14));
+	_addEgg(EntityType::ZOMBIE,     Color::FromRGB(0, 175, 175), Color::FromRGB(121, 156, 101));
+	_addEgg(EntityType::SLIME,      Color::FromRGB(81, 160, 62), Color::FromRGB(126, 191, 110));
+	_addEgg(EntityType::GHAST,      Color::FromRGB(249, 249, 249), Color::FromRGB(188, 188, 188));
+	_addEgg(EntityType::PIG_ZOMBIE, Color::FromRGB(234, 147, 147), Color::FromRGB(76, 113, 41));
+	_addEgg(EntityType::PIG,        Color::FromRGB(240, 165, 162), Color::FromRGB(219, 99, 95));
+	_addEgg(EntityType::SHEEP,      Color::FromRGB(231, 231, 231), Color::FromRGB(255, 181, 181));
+	_addEgg(EntityType::COW,        Color::FromRGB(68, 54, 38), Color::FromRGB(161, 161, 161));
+	_addEgg(EntityType::CHICKEN,    Color::FromRGB(161, 161, 161), Color::FromRGB(255, 0, 0));
+	_addEgg(EntityType::SQUID,      Color::FromRGB(34, 59, 77), Color::FromRGB(112, 136, 153));
 }
 
 const EntityEggInfo* EntityEggInfo::GetByEntityTypeID(EntityType::ID id)
