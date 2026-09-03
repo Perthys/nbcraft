@@ -14,5 +14,5 @@ public:
 	Color getColor(int data) const override;
 	bool useOn(ItemStack&, Player&, const TilePos& pos, Facing::Name face) const override;
 
-	static bool SpawnCreature(Level&, EntityType::ID, const Vec3& pos);
+	static bool SpawnCreature(Level& level, EntityType::ID entityType, const Vec3& pos);
 };
