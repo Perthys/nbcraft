@@ -1,4 +1,6 @@
 #pragma once
+#include <set>
+#include <utility>
 #include "world/tile/Tile.hpp"
 #include "Tick.hpp"
 #include "TickNextTickData.hpp"
@@ -11,6 +13,7 @@ class TileTickingQueue
 private:
 	Tick_t m_currentTick;
 	MovePriorityQueue<TickNextTickData, std::greater<TickNextTickData> > m_tickData;
+	std::set<std::pair<TilePos, TileID> > m_tickDataSet;
 	bool m_instaTick;
 	Random m_random;
 

@@ -31,7 +31,8 @@ void TileTickingQueue::add(TileSource& region, const TilePos& pos, TileID tileId
 	}
 	else
 	{
-		m_tickData.push(TickNextTickData(pos, tileId, m_currentTick + tickDelay));
+		if (m_tickDataSet.insert(std::make_pair(pos, tileId)).second)
+			m_tickData.push(TickNextTickData(pos, tileId, m_currentTick + tickDelay));
 	}
 }
 
@@ -47,6 +48,7 @@ bool TileTickingQueue::tickPendingTicks(TileSource& region, Tick_t until, int ma
 	{
 		TickNextTickData data;
 		m_tickData.popInto(data);
+		m_tickDataSet.erase(std::make_pair(data.pos, data.tileId));
 
 		m_currentTick = data.tick;
 		ticksProcessed++;
@@ -76,6 +78,7 @@ bool TileTickingQueue::tickPendingTicks(TileSource& region, int max, bool instaT
 	{
 		TickNextTickData data;
 		m_tickData.popInto(data);
+		m_tickDataSet.erase(std::make_pair(data.pos, data.tileId));
 
 		m_currentTick = data.tick;
 		ticksProcessed++;
@@ -130,6 +133,7 @@ void TileTickingQueue::load(const CompoundTag& tag)
 		TilePos pos = TilePos(childTag->getInt32("x"), childTag->getInt32("y"), childTag->getInt32("z"));
 		TileID tileID = static_cast<TileID>(childTag->getInt8("tileID"));
 		Tick_t tick = static_cast<Tick_t>(childTag->getInt64("tick"));
-		m_tickData.push(TickNextTickData(pos, tileID, tick));
+		if (m_tickDataSet.insert(std::make_pair(pos, tileID)).second)
+			m_tickData.push(TickNextTickData(pos, tileID, tick));
 	}
 }
