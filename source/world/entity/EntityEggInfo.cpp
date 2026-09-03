@@ -16,18 +16,18 @@ void EntityEggInfo::_addEgg(EntityType::ID spawnedType, const Color& primaryColo
 
 void EntityEggInfo::initEggs()
 {
-	_addEgg(EntityType::CREEPER,    0xFF0BA70D, 0xFF000000);
-	_addEgg(EntityType::SKELETON,   0xFFC1C1C1, 0xFF494949);
-	_addEgg(EntityType::SPIDER,     0xFF262D34, 0xFF0E0EA8);
-	_addEgg(EntityType::ZOMBIE,     0xFFAFAF00, 0xFF659C79);
-	_addEgg(EntityType::SLIME,      0xFF3EA051, 0xFF6EBF7E);
-	_addEgg(EntityType::GHAST,      0xFFF9F9F9, 0xFFBCBCBC);
-	_addEgg(EntityType::PIG_ZOMBIE, 0xFF9393EA, 0xFF29714C);
-	_addEgg(EntityType::PIG,        0xFFA2A5F0, 0xFF5F63DB);
-	_addEgg(EntityType::SHEEP,      0xFFE7E7E7, 0xFFB5B5FF);
-	_addEgg(EntityType::COW,        0xFF263644, 0xFFA1A1A1);
-	_addEgg(EntityType::CHICKEN,    0xFFA1A1A1, 0xFF0000FF);
-	_addEgg(EntityType::SQUID,      0xFF4D3B22, 0xFF998870);
+	_addEgg(EntityType::CREEPER,    Color::FromRGB(0x0D, 0xA7, 0x0B), Color::FromRGB(0x00, 0x00, 0x00));
+	_addEgg(EntityType::SKELETON,   Color::FromRGB(0xC1, 0xC1, 0xC1), Color::FromRGB(0x49, 0x49, 0x49));
+	_addEgg(EntityType::SPIDER,     Color::FromRGB(0x34, 0x2D, 0x26), Color::FromRGB(0xA8, 0x0E, 0x0E));
+	_addEgg(EntityType::ZOMBIE,     Color::FromRGB(0x00, 0xAF, 0xAF), Color::FromRGB(0x79, 0x9C, 0x65));
+	_addEgg(EntityType::SLIME,      Color::FromRGB(0x51, 0xA0, 0x3E), Color::FromRGB(0x7E, 0xBF, 0x6E));
+	_addEgg(EntityType::GHAST,      Color::FromRGB(0xF9, 0xF9, 0xF9), Color::FromRGB(0xBC, 0xBC, 0xBC));
+	_addEgg(EntityType::PIG_ZOMBIE, Color::FromRGB(0xEA, 0x93, 0x93), Color::FromRGB(0x4C, 0x71, 0x29));
+	_addEgg(EntityType::PIG,        Color::FromRGB(0xF0, 0xA5, 0xA2), Color::FromRGB(0xDB, 0x63, 0x5F));
+	_addEgg(EntityType::SHEEP,      Color::FromRGB(0xE7, 0xE7, 0xE7), Color::FromRGB(0xFF, 0xB5, 0xB5));
+	_addEgg(EntityType::COW,        Color::FromRGB(0x44, 0x36, 0x26), Color::FromRGB(0xA1, 0xA1, 0xA1));
+	_addEgg(EntityType::CHICKEN,    Color::FromRGB(0xA1, 0xA1, 0xA1), Color::FromRGB(0xFF, 0x00, 0x00));
+	_addEgg(EntityType::SQUID,      Color::FromRGB(0x22, 0x3B, 0x4D), Color::FromRGB(0x70, 0x88, 0x99));
 }
 
 const EntityEggInfo* EntityEggInfo::GetByEntityTypeID(EntityType::ID id)
