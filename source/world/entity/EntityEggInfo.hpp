@@ -18,7 +18,7 @@ public:
 public:
 	static void initEggs();
 
-	static const EntityEggInfo* GetByEntityTypeID(EntityType::ID);
+	static const EntityEggInfo* GetByEntityTypeID(EntityType::ID id);
 	static const std::map<EntityType::ID, EntityEggInfo>& GetEntityEggs() { return entityEggs; }
 
 private:
