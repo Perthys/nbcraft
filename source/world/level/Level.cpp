@@ -1338,10 +1338,6 @@ bool Level::addEntity(Entity* pEnt)
 		removeEntity(pOldEnt);
 	}
 
-	//@NOTE: useless Mth::floor() calls
-	Mth::floor(pEnt->m_pos.x / 16);
-	Mth::floor(pEnt->m_pos.z / 16);
-
 	//@NOTE: double check. Looks like someone just hacked it in
 	//@BUG: Camera doesn't work. This might be a side effect of having a demo mode?
 	//@BUG: Leaking the entity pointer.
@@ -1354,6 +1350,10 @@ bool Level::addEntity(Entity* pEnt)
 	{
 		m_players.push_back((Player*)pEnt);
 	}
+
+	ChunkPos cp(pEnt->m_pos);
+	if (hasChunk(cp))
+		getChunk(cp)->addEntity(pEnt);
 
 	m_entities.insert(std::make_pair(pEnt->hashCode(), pEnt));
 
