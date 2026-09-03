@@ -196,6 +196,7 @@
     <ClCompile Include="$(MC_ROOT)\source\world\entity\EntityCategories.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\entity\EntityType.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\entity\EntityTypeDescriptor.cpp" />
+    <ClCompile Include="$(MC_ROOT)\source\world\entity\EntityEggInfo.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\entity\MobCategory.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\entity\Arrow.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\entity\Skeleton.cpp" />
@@ -271,6 +272,7 @@
     <ClCompile Include="$(MC_ROOT)\source\world\item\EggItem.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\item\FlintAndSteelItem.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\item\SnowballItem.cpp" />
+    <ClCompile Include="$(MC_ROOT)\source\world\item\SpawnEggItem.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\particle\ItemParticle.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\item\RecordingItem.cpp" />
     <ClCompile Include="$(MC_ROOT)\source\world\tile\RecordPlayerTile.cpp" />
@@ -409,6 +411,7 @@
     <ClInclude Include="$(MC_ROOT)\source\world\entity\EntityCategories.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\entity\EntityType.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\entity\EntityTypeDescriptor.hpp" />
+    <ClInclude Include="$(MC_ROOT)\source\world\entity\EntityEggInfo.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\entity\MobFactory.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\level\levelgen\chunk\ChunkPos.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\level\levelgen\chunk\ChunkTilePos.hpp" />
@@ -492,6 +495,7 @@
     <ClInclude Include="$(MC_ROOT)\source\world\item\EggItem.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\item\FlintAndSteelItem.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\item\SnowballItem.hpp" />
+    <ClInclude Include="$(MC_ROOT)\source\world\item\SpawnEggItem.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\item\RecordingItem.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\tile\RecordPlayerTile.hpp" />
     <ClInclude Include="$(MC_ROOT)\source\world\tile\CakeTile.hpp" />

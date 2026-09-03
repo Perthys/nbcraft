@@ -37,6 +37,7 @@
 #include "FishingRodItem.hpp"
 #include "RecordingItem.hpp"
 #include "BucketItem.hpp"
+#include "SpawnEggItem.hpp"
 
 #define ITEM(x) ((x) - 256)
 
@@ -598,6 +599,9 @@ void Item::initItems()
 		->setIcon(2, 15)
 		->setDescriptionId("camera");
 
+	Item::spawnEgg = NEW_X_ITEMN(SpawnEggItem, ITEM_SPAWN_EGG)
+		->setDescriptionId("monsterPlacer");
+
 	Item::rocket = NEW_X_ITEMN(RocketItem, ITEM_ROCKET)
 		->setIcon(14, 2)
 		->setDescriptionId("rocket");
@@ -874,6 +878,7 @@ Item
 	*Item::record_01,
 	*Item::record_02,
 	*Item::camera,
+	*Item::spawnEgg,
 	*Item::rocket,
 	*Item::quiver;
 

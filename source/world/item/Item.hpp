@@ -222,6 +222,7 @@ public: // Static declarations
 		*record_01,
 		*record_02,
 		*camera,
+		*spawnEgg,
 		*rocket,
 		*quiver;
 };
