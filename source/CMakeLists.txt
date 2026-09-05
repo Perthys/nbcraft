@@ -333,7 +333,6 @@ add_library(nbcraft-core STATIC
     world/entity/EntityCategories.cpp
     world/entity/EntityType.cpp
     world/entity/EntityTypeDescriptor.cpp
-    world/entity/EntityEggInfo.cpp
     world/entity/MobCategory.cpp
     world/entity/Squid.cpp
     world/entity/Giant.cpp

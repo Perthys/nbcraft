@@ -1,9 +1,10 @@
 #include "CreativeMenu.hpp"
+#include "GameMods.hpp"
 #include "Slot.hpp"
 #include "common/Utils.hpp"
 #include "world/tile/Tile.hpp"
 #include "world/item/Item.hpp"
-#include "world/entity/EntityEggInfo.hpp"
+#include "world/item/SpawnEggItem.hpp"
 
 std::vector<ItemStack> CreativeMenu::creativeItems;
 bool CreativeMenu::initialized = false;
@@ -158,13 +159,15 @@ void CreativeMenu::initCreativeItems()
             creativeItems.push_back(ItemStack(dye, 1, aux));
     }
 
+#ifdef ENH_SPAWN_EGGS
     Item* pSpawnEgg = Item::items[ITEM_SPAWN_EGG];
     if (pSpawnEgg)
     {
-        const std::map<EntityType::ID, EntityEggInfo>& entityEggs = EntityEggInfo::GetEntityEggs();
-        for (std::map<EntityType::ID, EntityEggInfo>::const_iterator it = entityEggs.begin(); it != entityEggs.end(); it++)
+        const std::map<EntityType::ID, SpawnEggItem::Type>& entityEggs = SpawnEggItem::Type::GetEntityEggs();
+        for (std::map<EntityType::ID, SpawnEggItem::Type>::const_iterator it = entityEggs.begin(); it != entityEggs.end(); it++)
             creativeItems.push_back(ItemStack(pSpawnEgg, 1, it->second.m_spawnedType));
     }
+#endif
 }
 
 CreativeMenu::CreativeMenu(Container* inventory, Container* container)

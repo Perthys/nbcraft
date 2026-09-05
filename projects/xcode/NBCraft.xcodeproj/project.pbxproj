@@ -270,8 +270,6 @@
 		8445E7A22D769329008DC834 /* EntityType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8445E7972D769329008DC834 /* EntityType.cpp */; };
 		8445E7A32D769329008DC834 /* EntityTypeDescriptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8445E7982D769329008DC834 /* EntityTypeDescriptor.cpp */; };
 		8445E7A42D769329008DC834 /* EntityTypeDescriptor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 8445E7992D769329008DC834 /* EntityTypeDescriptor.hpp */; };
-		84ED42062FC3EC220038BAC4 /* EntityEggInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 84ED42052FC3EC220038BAC4 /* EntityEggInfo.hpp */; };
-		84ED42082FC3EC220038BAC4 /* EntityEggInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84ED42072FC3EC220038BAC4 /* EntityEggInfo.cpp */; };
 		8445E7A52D769329008DC834 /* MobCategory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8445E79A2D769329008DC834 /* MobCategory.cpp */; };
 		8445E7A62D769329008DC834 /* MobCategory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 8445E79B2D769329008DC834 /* MobCategory.hpp */; };
 		8445E7A72D769329008DC834 /* Sheep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8445E79C2D769329008DC834 /* Sheep.cpp */; };
@@ -2506,8 +2504,6 @@
 		8445E7972D769329008DC834 /* EntityType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityType.cpp; sourceTree = "<group>"; };
 		8445E7982D769329008DC834 /* EntityTypeDescriptor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityTypeDescriptor.cpp; sourceTree = "<group>"; };
 		8445E7992D769329008DC834 /* EntityTypeDescriptor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityTypeDescriptor.hpp; sourceTree = "<group>"; };
-		84ED42052FC3EC220038BAC4 /* EntityEggInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityEggInfo.hpp; sourceTree = "<group>"; };
-		84ED42072FC3EC220038BAC4 /* EntityEggInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityEggInfo.cpp; sourceTree = "<group>"; };
 		8445E79A2D769329008DC834 /* MobCategory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobCategory.cpp; sourceTree = "<group>"; };
 		8445E79B2D769329008DC834 /* MobCategory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MobCategory.hpp; sourceTree = "<group>"; };
 		8445E79C2D769329008DC834 /* Sheep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sheep.cpp; sourceTree = "<group>"; };
@@ -4223,8 +4219,6 @@
 				8470AF282BE9B60900BCA54E /* EntityType.hpp */,
 				8445E7982D769329008DC834 /* EntityTypeDescriptor.cpp */,
 				8445E7992D769329008DC834 /* EntityTypeDescriptor.hpp */,
-				84ED42052FC3EC220038BAC4 /* EntityEggInfo.hpp */,
-				84ED42072FC3EC220038BAC4 /* EntityEggInfo.cpp */,
 				840DD65A2AC810620006A435 /* FallingTile.cpp */,
 				840DD65B2AC810620006A435 /* FallingTile.hpp */,
 				84E8F9EA2FEF611800D0669F /* Fireball.cpp */,
@@ -6710,7 +6704,6 @@
 				8470AF2B2BE9B60A00BCA54E /* EntityType.hpp in Headers */,
 				84E24C842FC969D9004C4D06 /* FenceGateTile.hpp in Headers */,
 				8445E7A42D769329008DC834 /* EntityTypeDescriptor.hpp in Headers */,
-				84ED42062FC3EC220038BAC4 /* EntityEggInfo.hpp in Headers */,
 				84B9D89F2F3BE0A900FD67C4 /* ArmorItem.hpp in Headers */,
 				84E2A3F62FBAAD6A0026780B /* EntityTile.hpp in Headers */,
 				84B9D8A02F3BE0A900FD67C4 /* HoeItem.hpp in Headers */,
@@ -7910,7 +7903,6 @@
 				84E2A3E92FBAAD6A0026780B /* ChestTile.cpp in Sources */,
 				84BF63742AF18631008A9995 /* TopSnowTile.cpp in Sources */,
 				8445E7A32D769329008DC834 /* EntityTypeDescriptor.cpp in Sources */,
-				84ED42082FC3EC220038BAC4 /* EntityEggInfo.cpp in Sources */,
 				84BF63752AF18631008A9995 /* TorchTile.cpp in Sources */,
 				84BF63762AF18631008A9995 /* TransparentTile.cpp in Sources */,
 				84BF63772AF18631008A9995 /* TreeTile.cpp in Sources */,

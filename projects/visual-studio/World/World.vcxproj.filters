@@ -563,9 +563,6 @@
     <ClCompile Include="$(MC_ROOT)\source\world\entity\EntityTypeDescriptor.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="$(MC_ROOT)\source\world\entity\EntityEggInfo.cpp">
-      <Filter>Source Files\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="$(MC_ROOT)\source\world\entity\EntityCategories.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
@@ -1226,9 +1223,6 @@
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
     <ClInclude Include="$(MC_ROOT)\source\world\entity\EntityTypeDescriptor.hpp">
-      <Filter>Header Files\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MC_ROOT)\source\world\entity\EntityEggInfo.hpp">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
     <ClInclude Include="$(MC_ROOT)\source\world\entity\EntityCategories.hpp">
