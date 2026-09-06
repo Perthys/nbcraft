@@ -16,7 +16,7 @@ SpawnEggItem::Type::Type(EntityType::ID spawnedType, const Color& primaryColor, 
 {
 }
 
-void SpawnEggItem::_addEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor)
+void SpawnEggItem::_AddEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor)
 {
 	eggTypes.insert(std::make_pair(spawnedType, Type(spawnedType, primaryColor, secondaryColor)));
 }
@@ -32,18 +32,18 @@ const SpawnEggItem::Type* SpawnEggItem::GetTypeByEntityTypeID(EntityType::ID id)
 
 void SpawnEggItem::initTypes()
 {
-	_addEgg(EntityType::CREEPER,    Color::FromRGB( 13, 167,  11), Color::FromRGB(  0,   0,   0));
-	_addEgg(EntityType::SKELETON,   Color::FromRGB(193, 193, 193), Color::FromRGB( 73,  73,  73));
-	_addEgg(EntityType::SPIDER,     Color::FromRGB( 52,  45,  38), Color::FromRGB(168,  14,  14));
-	_addEgg(EntityType::ZOMBIE,     Color::FromRGB(  0, 175, 175), Color::FromRGB(121, 156, 101));
-	_addEgg(EntityType::SLIME,      Color::FromRGB( 81, 160,  62), Color::FromRGB(126, 191, 110));
-	_addEgg(EntityType::GHAST,      Color::FromRGB(249, 249, 249), Color::FromRGB(188, 188, 188));
-	_addEgg(EntityType::PIG_ZOMBIE, Color::FromRGB(234, 147, 147), Color::FromRGB( 76, 113,  41));
-	_addEgg(EntityType::PIG,        Color::FromRGB(240, 165, 162), Color::FromRGB(219,  99,  95));
-	_addEgg(EntityType::SHEEP,      Color::FromRGB(231, 231, 231), Color::FromRGB(255, 181, 181));
-	_addEgg(EntityType::COW,        Color::FromRGB( 68,  54,  38), Color::FromRGB(161, 161, 161));
-	_addEgg(EntityType::CHICKEN,    Color::FromRGB(161, 161, 161), Color::FromRGB(255,   0,   0));
-	_addEgg(EntityType::SQUID,      Color::FromRGB( 34,  59,  77), Color::FromRGB(112, 136, 153));
+	_AddEgg(EntityType::CREEPER,    Color::FromRGB( 13, 167,  11), Color::FromRGB(  0,   0,   0));
+	_AddEgg(EntityType::SKELETON,   Color::FromRGB(193, 193, 193), Color::FromRGB( 73,  73,  73));
+	_AddEgg(EntityType::SPIDER,     Color::FromRGB( 52,  45,  38), Color::FromRGB(168,  14,  14));
+	_AddEgg(EntityType::ZOMBIE,     Color::FromRGB(  0, 175, 175), Color::FromRGB(121, 156, 101));
+	_AddEgg(EntityType::SLIME,      Color::FromRGB( 81, 160,  62), Color::FromRGB(126, 191, 110));
+	_AddEgg(EntityType::GHAST,      Color::FromRGB(249, 249, 249), Color::FromRGB(188, 188, 188));
+	_AddEgg(EntityType::PIG_ZOMBIE, Color::FromRGB(234, 147, 147), Color::FromRGB( 76, 113,  41));
+	_AddEgg(EntityType::PIG,        Color::FromRGB(240, 165, 162), Color::FromRGB(219,  99,  95));
+	_AddEgg(EntityType::SHEEP,      Color::FromRGB(231, 231, 231), Color::FromRGB(255, 181, 181));
+	_AddEgg(EntityType::COW,        Color::FromRGB( 68,  54,  38), Color::FromRGB(161, 161, 161));
+	_AddEgg(EntityType::CHICKEN,    Color::FromRGB(161, 161, 161), Color::FromRGB(255,   0,   0));
+	_AddEgg(EntityType::SQUID,      Color::FromRGB( 34,  59,  77), Color::FromRGB(112, 136, 153));
 }
 
 SpawnEggItem::SpawnEggItem(int itemID) : Item(itemID)

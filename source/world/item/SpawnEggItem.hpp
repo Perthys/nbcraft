@@ -8,12 +8,10 @@
 class SpawnEggItem : public Item
 {
 public:
-	class Type
+	struct Type
 	{
-	public:
 		Type(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor);
 
-	public:
 		EntityType::ID m_spawnedType;
 		Color m_primaryColor;
 		Color m_secondaryColor;
@@ -29,7 +27,7 @@ public:
 	bool useOn(ItemStack& itemStack, Player& player, const TilePos& pos, Facing::Name face) const override;
 
 private:
-	static void _addEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor);
+	static void _AddEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor);
 	static bool _SpawnCreature(Level& level, EntityType::ID entityType, const Vec3& pos);
 
 public:
