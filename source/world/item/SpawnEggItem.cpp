@@ -57,21 +57,6 @@ int SpawnEggItem::getIcon(const ItemStack* pItem) const
 	return Item::egg->getIcon(pItem);
 }
 
-std::string SpawnEggItem::getDescriptionId(ItemStack& item) const
-{
-	std::string descriptionId = Item::getDescriptionId();
-
-	EntityType::ID entityTypeId = (EntityType::ID)item.getAuxValue();
-	const EntityTypeDescriptor* pTypeDesc = EntityTypeDescriptor::GetByEntityTypeID(entityTypeId);
-	if (pTypeDesc)
-	{
-		const EntityType& entityType = pTypeDesc->getEntityType();
-		descriptionId += "." + entityType.getName();
-	}
-
-	return descriptionId;
-}
-
 std::string SpawnEggItem::getHovertextName(ItemStack& item) const
 {
 	std::string entityName = "entity.unknown.name";

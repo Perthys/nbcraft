@@ -36,7 +36,6 @@ public:
 
 public:
 	int getIcon(const ItemStack* pItem) const override;
-	std::string getDescriptionId(ItemStack& item) const override;
 	std::string getHovertextName(ItemStack& item) const override;
 	Color getColor(int auxValue) const override;
 	bool useOn(ItemStack& itemStack, Player& player, const TilePos& pos, Facing::Name face) const override;

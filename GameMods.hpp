@@ -55,7 +55,7 @@
 //#define ENH_NEWER_CONSOLE_ITEM_LIGHTING  // Makes the Console UI tile items lighting based on Title Update 5
 #define ENH_NEW_FEEDBACK_INDICATOR 	       // Use the new mesh-based interaction feedback indicator.
 #define ENH_FOV_MODIFIER 	               // Smooth FOV modifier - provides flying FOV boost and adjustable FOV slider
-#define ENH_SPAWN_EGGS
+#define ENH_SPAWN_EGGS                     // Adds spawn eggs to the Creative inventory for spawning mobs
 
 // TODO: Implement this permanently?
 #define ENH_IMPROVED_SAVING     	       // Improve world saving. The original Minecraft doesn't always really save for some reason
