@@ -20,7 +20,7 @@ public:
 
 	public:
 		static const Type* GetByEntityTypeID(EntityType::ID id);
-		static const std::map<EntityType::ID, Type>& GetEntityEggs() { return entityEggs; }
+		static const std::map<EntityType::ID, Type>& GetEggTypes() { return entityEggs; }
 
 	private:
 		friend class SpawnEggItem;

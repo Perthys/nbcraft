@@ -163,7 +163,7 @@ void CreativeMenu::initCreativeItems()
     Item* pSpawnEgg = Item::items[ITEM_SPAWN_EGG];
     if (pSpawnEgg)
     {
-        const std::map<EntityType::ID, SpawnEggItem::Type>& eggTypes = SpawnEggItem::Type::GetEntityEggs();
+        const std::map<EntityType::ID, SpawnEggItem::Type>& eggTypes = SpawnEggItem::Type::GetEggTypes();
         for (std::map<EntityType::ID, SpawnEggItem::Type>::const_iterator it = eggTypes.begin(); it != eggTypes.end(); it++)
             creativeItems.push_back(ItemStack(pSpawnEgg, 1, it->second.m_spawnedType));
     }
