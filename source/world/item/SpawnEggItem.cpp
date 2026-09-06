@@ -7,7 +7,7 @@
 #include "world/entity/MobFactory.hpp"
 #include "world/entity/EntityTypeDescriptor.hpp"
 
-std::map<EntityType::ID, SpawnEggItem::Type> SpawnEggItem::Type::entityEggs = std::map<EntityType::ID, SpawnEggItem::Type>();
+std::map<EntityType::ID, SpawnEggItem::Type> SpawnEggItem::eggTypes = std::map<EntityType::ID, SpawnEggItem::Type>();
 
 SpawnEggItem::Type::Type(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor)
 	: m_spawnedType(spawnedType)
@@ -16,15 +16,15 @@ SpawnEggItem::Type::Type(EntityType::ID spawnedType, const Color& primaryColor, 
 {
 }
 
-void SpawnEggItem::Type::_addEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor)
+void SpawnEggItem::_addEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor)
 {
-	entityEggs.insert(std::make_pair(spawnedType, Type(spawnedType, primaryColor, secondaryColor)));
+	eggTypes.insert(std::make_pair(spawnedType, Type(spawnedType, primaryColor, secondaryColor)));
 }
 
-const SpawnEggItem::Type* SpawnEggItem::Type::GetByEntityTypeID(EntityType::ID id)
+const SpawnEggItem::Type* SpawnEggItem::GetTypeByEntityTypeID(EntityType::ID id)
 {
-	std::map<EntityType::ID, Type>::const_iterator it = entityEggs.find(id);
-	if (it != entityEggs.end())
+	std::map<EntityType::ID, Type>::const_iterator it = eggTypes.find(id);
+	if (it != eggTypes.end())
 		return &it->second;
 
 	return nullptr;
@@ -32,18 +32,18 @@ const SpawnEggItem::Type* SpawnEggItem::Type::GetByEntityTypeID(EntityType::ID i
 
 void SpawnEggItem::initTypes()
 {
-	Type::_addEgg(EntityType::CREEPER,    Color::FromRGB( 13, 167,  11), Color::FromRGB(  0,   0,   0));
-	Type::_addEgg(EntityType::SKELETON,   Color::FromRGB(193, 193, 193), Color::FromRGB( 73,  73,  73));
-	Type::_addEgg(EntityType::SPIDER,     Color::FromRGB( 52,  45,  38), Color::FromRGB(168,  14,  14));
-	Type::_addEgg(EntityType::ZOMBIE,     Color::FromRGB(  0, 175, 175), Color::FromRGB(121, 156, 101));
-	Type::_addEgg(EntityType::SLIME,      Color::FromRGB( 81, 160,  62), Color::FromRGB(126, 191, 110));
-	Type::_addEgg(EntityType::GHAST,      Color::FromRGB(249, 249, 249), Color::FromRGB(188, 188, 188));
-	Type::_addEgg(EntityType::PIG_ZOMBIE, Color::FromRGB(234, 147, 147), Color::FromRGB( 76, 113,  41));
-	Type::_addEgg(EntityType::PIG,        Color::FromRGB(240, 165, 162), Color::FromRGB(219,  99,  95));
-	Type::_addEgg(EntityType::SHEEP,      Color::FromRGB(231, 231, 231), Color::FromRGB(255, 181, 181));
-	Type::_addEgg(EntityType::COW,        Color::FromRGB( 68,  54,  38), Color::FromRGB(161, 161, 161));
-	Type::_addEgg(EntityType::CHICKEN,    Color::FromRGB(161, 161, 161), Color::FromRGB(255,   0,   0));
-	Type::_addEgg(EntityType::SQUID,      Color::FromRGB( 34,  59,  77), Color::FromRGB(112, 136, 153));
+	_addEgg(EntityType::CREEPER,    Color::FromRGB( 13, 167,  11), Color::FromRGB(  0,   0,   0));
+	_addEgg(EntityType::SKELETON,   Color::FromRGB(193, 193, 193), Color::FromRGB( 73,  73,  73));
+	_addEgg(EntityType::SPIDER,     Color::FromRGB( 52,  45,  38), Color::FromRGB(168,  14,  14));
+	_addEgg(EntityType::ZOMBIE,     Color::FromRGB(  0, 175, 175), Color::FromRGB(121, 156, 101));
+	_addEgg(EntityType::SLIME,      Color::FromRGB( 81, 160,  62), Color::FromRGB(126, 191, 110));
+	_addEgg(EntityType::GHAST,      Color::FromRGB(249, 249, 249), Color::FromRGB(188, 188, 188));
+	_addEgg(EntityType::PIG_ZOMBIE, Color::FromRGB(234, 147, 147), Color::FromRGB( 76, 113,  41));
+	_addEgg(EntityType::PIG,        Color::FromRGB(240, 165, 162), Color::FromRGB(219,  99,  95));
+	_addEgg(EntityType::SHEEP,      Color::FromRGB(231, 231, 231), Color::FromRGB(255, 181, 181));
+	_addEgg(EntityType::COW,        Color::FromRGB( 68,  54,  38), Color::FromRGB(161, 161, 161));
+	_addEgg(EntityType::CHICKEN,    Color::FromRGB(161, 161, 161), Color::FromRGB(255,   0,   0));
+	_addEgg(EntityType::SQUID,      Color::FromRGB( 34,  59,  77), Color::FromRGB(112, 136, 153));
 }
 
 SpawnEggItem::SpawnEggItem(int itemID) : Item(itemID)
@@ -70,7 +70,7 @@ std::string SpawnEggItem::getHovertextName(ItemStack& item) const
 
 Color SpawnEggItem::getColor(int auxValue) const
 {
-	const Type* pType = Type::GetByEntityTypeID((EntityType::ID)auxValue);
+	const Type* pType = GetTypeByEntityTypeID((EntityType::ID)auxValue);
 	if (!pType)
 		return Color::WHITE;
 

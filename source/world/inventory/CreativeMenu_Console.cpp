@@ -278,7 +278,7 @@ void CreativeMenu_Console::initCreativeItems()
     _addItem(MISC, Item::record_02);
 
 #ifdef ENH_SPAWN_EGGS
-    const std::map<EntityType::ID, SpawnEggItem::Type>& eggTypes = SpawnEggItem::Type::GetEggTypes();
+    const std::map<EntityType::ID, SpawnEggItem::Type>& eggTypes = SpawnEggItem::GetTypes();
     for (std::map<EntityType::ID, SpawnEggItem::Type>::const_iterator it = eggTypes.begin(); it != eggTypes.end(); it++)
         _addItem(MISC, Item::spawnEgg, it->second.m_spawnedType);
 #endif

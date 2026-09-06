@@ -17,18 +17,6 @@ public:
 		EntityType::ID m_spawnedType;
 		Color m_primaryColor;
 		Color m_secondaryColor;
-
-	public:
-		static const Type* GetByEntityTypeID(EntityType::ID id);
-		static const std::map<EntityType::ID, Type>& GetEggTypes() { return entityEggs; }
-
-	private:
-		friend class SpawnEggItem;
-
-		static void _addEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor);
-
-	private:
-		static std::map<EntityType::ID, Type> entityEggs;
 	};
 
 public:
@@ -43,5 +31,13 @@ public:
 public:
 	static void initTypes();
 
+	static const Type* GetTypeByEntityTypeID(EntityType::ID id);
+	static const std::map<EntityType::ID, Type>& GetTypes() { return eggTypes; }
+
+private:
+	static void _addEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor);
 	static bool SpawnCreature(Level& level, EntityType::ID entityType, const Vec3& pos);
+
+private:
+	static std::map<EntityType::ID, Type> eggTypes;
 };
