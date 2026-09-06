@@ -187,7 +187,7 @@ void NinecraftApp::_initAll()
 		_hasInitedStatics = true;
 		Material::initMaterials();
 		EntityTypeDescriptor::initDescriptors(); // custom
-		SpawnEggItem::Type::initEggs();
+		SpawnEggItem::initTypes();
 		MobCategory::initMobCategories();
 		MobFactory::initMobLists();
 		TileEntityFactory::initTileEntities();

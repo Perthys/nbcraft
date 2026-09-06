@@ -19,12 +19,12 @@ public:
 		Color m_secondaryColor;
 
 	public:
-		static void initEggs();
-
 		static const Type* GetByEntityTypeID(EntityType::ID id);
 		static const std::map<EntityType::ID, Type>& GetEntityEggs() { return entityEggs; }
 
 	private:
+		friend class SpawnEggItem;
+
 		static void _addEgg(EntityType::ID spawnedType, const Color& primaryColor, const Color& secondaryColor);
 
 	private:
@@ -42,5 +42,7 @@ public:
 	bool useOn(ItemStack& itemStack, Player& player, const TilePos& pos, Facing::Name face) const override;
 
 public:
+	static void initTypes();
+
 	static bool SpawnCreature(Level& level, EntityType::ID entityType, const Vec3& pos);
 };
