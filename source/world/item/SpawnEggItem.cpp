@@ -93,7 +93,7 @@ bool SpawnEggItem::useOn(ItemStack& itemStack, Player& player, const TilePos& po
 			spawnPos.y = pAABB->max.y;
 	}
 
-	if (!SpawnCreature(level, (EntityType::ID)itemStack.getAuxValue(), spawnPos))
+	if (!_SpawnCreature(level, (EntityType::ID)itemStack.getAuxValue(), spawnPos))
 		return false;
 
 	if (!player.isCreative())
@@ -102,7 +102,7 @@ bool SpawnEggItem::useOn(ItemStack& itemStack, Player& player, const TilePos& po
 	return true;
 }
 
-bool SpawnEggItem::SpawnCreature(Level& level, EntityType::ID entityType, const Vec3& pos)
+bool SpawnEggItem::_SpawnCreature(Level& level, EntityType::ID entityType, const Vec3& pos)
 {
 	if (level.m_bIsClientSide)
 		return true;
