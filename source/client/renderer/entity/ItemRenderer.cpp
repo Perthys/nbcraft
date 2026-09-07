@@ -356,7 +356,7 @@ void ItemRenderer::renderGuiItem(Minecraft& mc, const ItemStack& item, int x, in
 
 		// @TODO: this is hacky and inefficient. long-term we should be at least
 		// *trying* to bake layer & color variants into an atlas on runtime
-		for (int layer = 0; layer < (size_t)iconLayers; layer++)
+		for (int layer = 0; layer < (int)iconLayers; layer++)
 		{
 			int itemIcon = item.getIcon(layer);
 			Color itemColor = pItemType->getColor(&item, layer);
