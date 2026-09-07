@@ -104,6 +104,10 @@
 	"item_in_hand_color:item_in_hand": {
 		"defines": ["USE_VERTEX_COLORS"]
 	},
+	
+	"item_in_hand_ccolor:item_in_hand": {
+		"defines": ["USE_CURRENT_COLOR"]
+	},
 
 	"heavy_tile:entity_static": {
 		// Mojang put these here, but they just cause falling tiles to sometimes be visible thru terrain

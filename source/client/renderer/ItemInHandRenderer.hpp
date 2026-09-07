@@ -28,6 +28,7 @@ protected:
 		mce::MaterialPtr entity_alphatest;
 		mce::MaterialPtr item_in_hand;
 		mce::MaterialPtr item_in_hand_color;
+		mce::MaterialPtr item_in_hand_ccolor;
 		mce::MaterialPtr entity_glint;
 		mce::MaterialPtr entity_alphatest_glint;
 		mce::MaterialPtr item_in_hand_glint;
@@ -40,7 +41,7 @@ public:
 	void itemPlaced();
 	void itemUsed();
 	void render(float a);
-	void renderItem(const Entity& entity, const ItemStack& item, float a);
+	void renderItem(const Entity& entity, const ItemStack& item, float a, bool preshade = false);
 	void renderScreenEffect(float a);
 	void renderWater(float a);
 	void renderFire(float a);

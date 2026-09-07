@@ -85,6 +85,8 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 
 	matrix->translate(Vec3(pos.x, pos.y + 0.1f + yOffset * 0.1f, pos.z));
 
+	float fBrightness = itemEntity.getBrightness(1.0f);
+
 	Tile* pTile = itemStack.getTile();
 	if (pTile && TileRenderer::canRender(pTile->getRenderShape()))
 	{
@@ -101,6 +103,12 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 
 		matrix->scale(scale);
 
+#ifdef FEATURE_GFX_SHADERS
+		Color tileLightColor = Color::WHITE;
+#else
+		Color tileLightColor(fBrightness, fBrightness, fBrightness);
+#endif
+
 		for (int i = 0; i < itemsToRender; i++)
 		{
 			MatrixStack::Ref matrix = MatrixStack::World.push();
@@ -112,7 +120,7 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 					0.2f * (m_random.nextFloat() * 2.0f - 1.0f) / scale));
 			}
 
-			m_pTileRenderer->renderTile(FullTile(pTile, itemStack.getAuxValue()), m_itemMaterials.item_entity_tile, itemEntity.getBrightness(1.0f));
+			m_pTileRenderer->renderTile(FullTile(pTile, itemStack.getAuxValue()), m_itemMaterials.item_entity_tile, tileLightColor);
 		}
 	}
 	else
@@ -152,11 +160,12 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 				Color color = pItemType->getColor(&itemStack, layer);
 				int icon = itemStack.getIcon(layer);
 
+#ifndef FEATURE_GFX_SHADERS
+				color.mulRGB(fBrightness);
+#endif
+
 				if (isMultiLayered)
 				{
-#ifndef FEATURE_GFX_SHADERS
-					color.mulRGB(itemEntity.getBrightness(1.0f));
-#endif
 					t.color(color);
 				}
 				else
@@ -270,7 +279,7 @@ void ItemRenderer::renderGuiItem(Minecraft& mc, const ItemStack& item, int x, in
 		bCanRenderAsIs = true;
 	}
 #else
-	if (COND_PRE(TileRenderer::canRender(pTile->getRenderShape()) || g_ItemFrames[itemID] != 0))
+	if (COND_PRE(TileRenderer::canRender(pTile->getRenderShape()) || g_ItemFrames[item.getId()] != 0))
 	{
 		bCanRenderAsIs = true;
 	}
@@ -279,19 +288,19 @@ void ItemRenderer::renderGuiItem(Minecraft& mc, const ItemStack& item, int x, in
 	if (pTile && bCanRenderAsIs)
 	{
 #ifndef ENH_3D_INVENTORY_TILES
-		textures->loadAndBindTexture(C_BLOCKS_NAME);
+		textures.loadAndBindTexture(C_BLOCKS_NAME);
 
-		float texU = float(g_ItemFrames[item->getId()] % 10) * 48.0f;
-		float texV = float(g_ItemFrames[item->getId()] / 10) * 48.0f;
+		float texU = float(g_ItemFrames[item.getId()] % 10) * 48.0f;
+		float texV = float(g_ItemFrames[item.getId()] / 10) * 48.0f;
 
-		Tesselator& t = Tesselator::item;
+		Tesselator& t = Tesselator::instance;
 		// @NOTE: These do nothing, due to a previous t.voidBeginAndEndCalls call.
-		t.begin();
+		t.begin(4);
 		t.vertexUV(float(x +  0), float(y + 16), 0.0f,  texU          / 512.0f, (texV + 48.0f) / 512.0f);
 		t.vertexUV(float(x + 16), float(y + 16), 0.0f, (texU + 48.0f) / 512.0f, (texV + 48.0f) / 512.0f);
 		t.vertexUV(float(x + 16), float(y +  0), 0.0f, (texU + 48.0f) / 512.0f,  texV          / 512.0f);
 		t.vertexUV(float(x +  0), float(y +  0), 0.0f,  texU          / 512.0f,  texV          / 512.0f);
-		t.draw();
+		t.draw(m_itemMaterials.ui_textured);
 #else
 
 		textures.loadAndBindTexture(C_TERRAIN_NAME);
@@ -319,8 +328,14 @@ void ItemRenderer::renderGuiItem(Minecraft& mc, const ItemStack& item, int x, in
 		matrix->rotate(210.0f, Vec3::UNIT_X);
 		matrix->rotate(45.0f, Vec3::UNIT_Y);
 		matrix->rotate(-90.0f, Vec3::UNIT_Y);
+
+#ifdef FEATURE_GFX_SHADERS
+		bool preshade = true;
+#else
+		bool preshade = false;
+#endif
 		
-		m_pTileRenderer->renderTile(FullTile(pTile, item.getAuxValue()), m_itemMaterials.ui_item, color);
+		m_pTileRenderer->renderTile(FullTile(pTile, item.getAuxValue()), m_itemMaterials.ui_item, color, preshade);
 
 		Lighting::turnOff();
 		m_pTileRenderer->setLightingPreset(TileRenderer::LIGHTING_PRESET_JAVA);

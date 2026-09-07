@@ -116,5 +116,7 @@ bool SpawnEggItem::_SpawnCreature(Level& level, EntityType::ID entityType, const
 	pMob->moveTo(pos, Rot2(level.m_random.nextFloat() * 360.0f, 0.0f));
 	level.addEntity(pMob);
 
+	pMob->playAmbientSound();
+
 	return true;
 }

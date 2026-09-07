@@ -25,10 +25,6 @@
 
 #define DEFAULT_LIGHT_COLOR 0xFF00FF
 
-#ifdef FEATURE_GFX_SHADERS
-#define BAKE_LIGHTING
-#endif
-
 static const float _shouldPreshadeFace[Facing::COUNT] = {
 	/* DOWN  */ true,
 	/* UP    */ false,
@@ -2393,9 +2389,6 @@ void TileRenderer::renderTile(const FullTile& tile, const mce::MaterialPtr& mate
 {
 	Tesselator& t = m_tessellator;
 	Tile* tileType = tile.getType();
-#ifdef BAKE_LIGHTING
-	preshade = true;
-#endif
 	eRenderShape shape = tileType->getRenderShape();
 	tileType->updateDefaultShape();
 

@@ -23,6 +23,7 @@ ItemInHandRenderer::Materials::Materials()
     MATERIAL_PTR(switchable, entity_alphatest);
     MATERIAL_PTR(switchable, item_in_hand);
     MATERIAL_PTR(switchable, item_in_hand_color);
+    MATERIAL_PTR(switchable, item_in_hand_ccolor);
     MATERIAL_PTR(switchable, entity_glint);
     MATERIAL_PTR(switchable, entity_alphatest_glint);
     MATERIAL_PTR(switchable, item_in_hand_glint);
@@ -112,7 +113,13 @@ void ItemInHandRenderer::render(float a)
             matrix->rotate(180.0f, Vec3::UNIT_Y);
         }
 
-        renderItem(player, *pItem, a);
+#ifdef FEATURE_GFX_SHADERS
+        bool preshade = true; // hand does not technically move, so lighting doesn't update on shaders, or someting...
+#else
+        bool preshade = false;
+#endif
+
+        renderItem(player, *pItem, a, preshade);
 	}
 	else
 	{
@@ -140,40 +147,24 @@ void ItemInHandRenderer::render(float a)
 	Lighting::turnOff();
 }
 
-#ifdef ENH_SHADE_HELD_TILES
-#define SHADE_IF_NEEDED(col) t.color(color * Color(col*bright,col*bright,col*bright,1.0f))
-#else
-#define SHADE_IF_NEEDED(col) t.color(color)
-#endif
-
-void ItemInHandRenderer::renderItem(const Entity& entity, const ItemStack& item, float a)
+void ItemInHandRenderer::renderItem(const Entity& entity, const ItemStack& item, float a, bool preshade)
 {
     if (item.isEmpty())
         return;
 
-#ifdef ENH_SHADE_HELD_TILES
-    float bright = entity.getBrightness(a);
+    float fBrightness = entity.getBrightness(a);
+#ifdef FEATURE_GFX_SHADERS
+    Color tileLightColor = Color::WHITE;
+#else
+    Color tileLightColor = Color(fBrightness, fBrightness, fBrightness);
 #endif
 
     Tile* pTile = item.getTile();
     if (pTile && TileRenderer::canRender(pTile->getRenderShape()))
     {
-        currentShaderColor = Color::WHITE;
-        
         m_pMinecraft->m_pTextures->loadAndBindTexture(C_TERRAIN_NAME);
         
-#ifdef ENH_SHADE_HELD_TILES
-#	define ARGPATCH , bright
-#else
-#	define ARGPATCH
-#endif
-        
-        m_tileRenderer.renderTile(FullTile(pTile, item.getAuxValue()), m_materials.item_in_hand_color ARGPATCH);
-        
-#ifdef ARGPATCH
-#	undef ARGPATCH
-#endif
-        
+        m_tileRenderer.renderTile(FullTile(pTile, item.getAuxValue()), m_materials.item_in_hand_color, tileLightColor, preshade);
     }
     else
     {
@@ -221,9 +212,9 @@ void ItemInHandRenderer::renderItem(const Entity& entity, const ItemStack& item,
             float texV_1 = C_RATIO * float(textureY + 0.0f);
             float texV_2 = C_RATIO * float(textureY + 15.99f);
 
-            t.begin(264);
+            currentShaderColor = color * tileLightColor;
 
-            SHADE_IF_NEEDED(1.0f);
+            t.begin(264);
         
             t.normal(Vec3::UNIT_Z);
             t.vertexUV(0.0f, 0.0f, 0.0f,         texU_2, texV_2);
@@ -237,7 +228,6 @@ void ItemInHandRenderer::renderItem(const Entity& entity, const ItemStack& item,
             t.vertexUV(1.0f, 0.0f, -C_ONE_PIXEL, texU_1, texV_2);
             t.vertexUV(0.0f, 0.0f, -C_ONE_PIXEL, texU_2, texV_2);
         
-            SHADE_IF_NEEDED(1.0f);
             t.normal(Vec3::NEG_UNIT_X);
             for (int i = 0; i < 16; i++)
             {
@@ -254,7 +244,6 @@ void ItemInHandRenderer::renderItem(const Entity& entity, const ItemStack& item,
                 t.vertexUV((i + 1) * C_ONE_PIXEL, 0.0f, -C_ONE_PIXEL, Mth::Lerp(texU_2, texU_1, i * C_ONE_PIXEL) - C_RATIO_2, texV_2);
             }
         
-            SHADE_IF_NEEDED(1.0f);
             for (int i = 0; i < 16; i++)
             {
                 t.vertexUV(0.0f, (i + 1) * C_ONE_PIXEL, 0.0f,         texU_2, Mth::Lerp(texV_2, texV_1, i * C_ONE_PIXEL));
@@ -270,11 +259,7 @@ void ItemInHandRenderer::renderItem(const Entity& entity, const ItemStack& item,
                 t.vertexUV(1.0f, i * C_ONE_PIXEL, -C_ONE_PIXEL, texU_1, Mth::Lerp(texV_2, texV_1, i * C_ONE_PIXEL));
             }
 
-#ifndef ENH_SHADE_HELD_TILES
-            t.draw(color == Color::WHITE ? m_materials.item_in_hand : m_materials.item_in_hand_color);
-#else
-            t.draw(m_materials.item_in_hand_color);
-#endif
+            t.draw(color == Color::WHITE ? m_materials.item_in_hand : m_materials.item_in_hand_ccolor);
         }
     }
 }
