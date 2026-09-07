@@ -77,6 +77,8 @@ Color SpawnEggItem::getColor(const ItemStack* itemStack, int layer) const
 	case 0: return pType->m_primaryColor;
 	case 1: return pType->m_secondaryColor;
 	}
+
+	return Color::WHITE;
 }
 
 bool SpawnEggItem::useOn(ItemStack& itemStack, Player& player, const TilePos& pos, Facing::Name face) const
