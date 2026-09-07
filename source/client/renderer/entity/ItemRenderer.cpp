@@ -32,6 +32,7 @@ const uint8_t g_ItemFrames[C_MAX_TILES] =
 ItemRenderer::Materials::Materials()
 {
 	MATERIAL_PTR(switchable, item_entity_item);
+	MATERIAL_PTR(switchable, item_entity_item_layered);
 	MATERIAL_PTR(switchable, item_entity_tile);
 	MATERIAL_PTR(common, ui_fill_color);
 	MATERIAL_PTR(common, ui_fill_gradient);
@@ -117,7 +118,6 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 	else
 	{
 		matrix->scale(0.5f);
-		int icon = itemStack.getIcon();
 
 		bindTexture(itemStack.getTile() ? C_TERRAIN_NAME : C_ITEMS_NAME);
 
@@ -135,21 +135,43 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 			matrix->rotate(180.0f - m_pDispatcher->m_rot.yaw, Vec3::UNIT_Y);
 
 			Tesselator& t = Tesselator::instance;
-			t.begin(4);
+			Item* pItemType = itemStack.getItem();
+			size_t iconLayers = pItemType->getIconLayerCount();
+			bool isMultiLayered = iconLayers > 1;
 
-			Color color = itemStack.getItem()->getColor(itemStack.getAuxValue());
+			if (isMultiLayered) // we will apply the brightness ourselves via vertex colors
+				currentShaderColor = Color::WHITE;
 
-#ifdef ENH_SHADE_HELD_TILES
-			color.mulRGB(itemEntity.getBrightness(1.0f));
+			// @TODO: this is hacky and inefficient. long-term we should be at least
+			// *trying* to bake layer & color variants into an atlas on runtime
+			t.begin(4 * iconLayers);
+
+			// @NOTE: for whatever reason, batched items need to have their layers rendered in reverse order
+			for (int layer = iconLayers - 1; layer >= 0; layer--)
+			{
+				Color color = pItemType->getColor(&itemStack, layer);
+				int icon = itemStack.getIcon(layer);
+
+				if (isMultiLayered)
+				{
+#ifndef FEATURE_GFX_SHADERS
+					color.mulRGB(itemEntity.getBrightness(1.0f));
 #endif
-			currentShaderColor = color;
-			t.normal(Vec3::UNIT_Y);
-			t.vertexUV(-0.5f, -0.25f, 0.0f, float(16 * (icon % 16))     / 256.0f, float(16 * (icon / 16 + 1)) / 256.0f);
-			t.vertexUV(+0.5f, -0.25f, 0.0f, float(16 * (icon % 16 + 1)) / 256.0f, float(16 * (icon / 16 + 1)) / 256.0f);
-			t.vertexUV(+0.5f, +0.75f, 0.0f, float(16 * (icon % 16 + 1)) / 256.0f, float(16 * (icon / 16))     / 256.0f);
-			t.vertexUV(-0.5f, +0.75f, 0.0f, float(16 * (icon % 16))     / 256.0f, float(16 * (icon / 16))     / 256.0f);
+					t.color(color);
+				}
+				else
+				{
+					currentShaderColor = color;
+				}
+
+				t.normal(Vec3::UNIT_Y);
+				t.vertexUV(-0.5f, -0.25f, 0.0f, float(16 * (icon % 16)) / 256.0f, float(16 * (icon / 16 + 1)) / 256.0f);
+				t.vertexUV(+0.5f, -0.25f, 0.0f, float(16 * (icon % 16 + 1)) / 256.0f, float(16 * (icon / 16 + 1)) / 256.0f);
+				t.vertexUV(+0.5f, +0.75f, 0.0f, float(16 * (icon % 16 + 1)) / 256.0f, float(16 * (icon / 16)) / 256.0f);
+				t.vertexUV(-0.5f, +0.75f, 0.0f, float(16 * (icon % 16)) / 256.0f, float(16 * (icon / 16)) / 256.0f);
+			}
             
-			t.draw(m_itemMaterials.item_entity_item);
+			t.draw(isMultiLayered ? m_itemMaterials.item_entity_item_layered : m_itemMaterials.item_entity_item);
 		}
 	}
 }
@@ -182,6 +204,7 @@ void ItemRenderer::blit(int dx, int dy, int sx, int sy, int tw, int th, const Co
 	t.vertexUV(ex,      ey,      0.0f, float(vx)      / 256.0f, float(vy)      / 256.0f);
 	t.draw(color == Color::WHITE ? m_itemMaterials.ui_textured : m_itemMaterials.ui_texture_and_color);
 }
+
 void ItemRenderer::renderGuiItemOverlay(Minecraft& mc, const ItemStack& item, int x, int y)
 {
 	if (item.isEmpty())
@@ -313,6 +336,16 @@ void ItemRenderer::renderGuiItem(Minecraft& mc, const ItemStack& item, int x, in
 		else
 			textures.loadAndBindTexture(C_ITEMS_NAME);
 
-		blit(x, y, 16 * (item.getIcon() % 16), 16 * (item.getIcon() / 16), 16, 16, color * item.getItem()->getColor(item.getAuxValue()));
+		Item*  pItemType  = item.getItem();
+		size_t iconLayers = pItemType->getIconLayerCount();
+
+		// @TODO: this is hacky and inefficient. long-term we should be at least
+		// *trying* to bake layer & color variants into an atlas on runtime
+		for (int layer = 0; layer < iconLayers; layer++)
+		{
+			int itemIcon = item.getIcon(layer);
+			Color itemColor = pItemType->getColor(&item, layer);
+			blit(x, y, 16 * (itemIcon % 16), 16 * (itemIcon / 16), 16, 16, color * itemColor);
+		}
 	}
 }

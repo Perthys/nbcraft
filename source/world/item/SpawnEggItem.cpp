@@ -52,11 +52,6 @@ SpawnEggItem::SpawnEggItem(int itemID) : Item(itemID)
 	m_maxDamage = 0;
 }
 
-int SpawnEggItem::getIcon(const ItemStack* pItem) const
-{
-	return Item::egg->getIcon(pItem);
-}
-
 std::string SpawnEggItem::getHovertextName(ItemStack& item) const
 {
 	std::string entityName = "entity.unknown.name";
@@ -68,13 +63,20 @@ std::string SpawnEggItem::getHovertextName(ItemStack& item) const
 	return Util::format(Language::get(Item::getName()).c_str(), Language::get(entityName).c_str());
 }
 
-Color SpawnEggItem::getColor(int auxValue) const
+Color SpawnEggItem::getColor(const ItemStack* itemStack, int layer) const
 {
-	const Type* pType = GetTypeByEntityTypeID((EntityType::ID)auxValue);
+	if (!itemStack)
+		return Color::WHITE;
+
+	const Type* pType = GetTypeByEntityTypeID((EntityType::ID)itemStack->getAuxValue());
 	if (!pType)
 		return Color::WHITE;
 
-	return pType->m_primaryColor;
+	switch (layer)
+	{
+	case 0: return pType->m_primaryColor;
+	case 1: return pType->m_secondaryColor;
+	}
 }
 
 bool SpawnEggItem::useOn(ItemStack& itemStack, Player& player, const TilePos& pos, Facing::Name face) const

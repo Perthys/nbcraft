@@ -21,9 +21,8 @@ public:
 	SpawnEggItem(int itemID);
 
 public:
-	int getIcon(const ItemStack* pItem) const override;
 	std::string getHovertextName(ItemStack& item) const override;
-	Color getColor(int auxValue) const override;
+	Color getColor(const ItemStack* itemStack = nullptr, int layer = 0) const override;
 	bool useOn(ItemStack& itemStack, Player& player, const TilePos& pos, Facing::Name face) const override;
 
 private:

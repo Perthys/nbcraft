@@ -76,6 +76,10 @@
 		"defines": ["USE_CURRENT_COLOR"]
 	},
 	
+	"item_entity_item_layered:item_entity": {
+		"defines": ["USE_VERTEX_COLORS"]
+	},
+	
 	"item_entity_tile:item_entity": {
 		"defines": ["USE_VERTEX_COLORS"]
 	},
