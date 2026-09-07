@@ -85,8 +85,6 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 
 	matrix->translate(Vec3(pos.x, pos.y + 0.1f + yOffset * 0.1f, pos.z));
 
-	float fBrightness = itemEntity.getBrightness(1.0f);
-
 	Tile* pTile = itemStack.getTile();
 	if (pTile && TileRenderer::canRender(pTile->getRenderShape()))
 	{
@@ -106,6 +104,7 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 #ifdef FEATURE_GFX_SHADERS
 		Color tileLightColor = Color::WHITE;
 #else
+		float fBrightness = itemEntity.getBrightness(1.0f);
 		Color tileLightColor(fBrightness, fBrightness, fBrightness);
 #endif
 
@@ -161,6 +160,7 @@ void ItemRenderer::render(const Entity& entity, const Vec3& pos, float rot, floa
 				int icon = itemStack.getIcon(layer);
 
 #ifndef FEATURE_GFX_SHADERS
+				float fBrightness = itemEntity.getBrightness(1.0f);
 				color.mulRGB(fBrightness);
 #endif
 
