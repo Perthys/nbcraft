@@ -152,10 +152,10 @@ void ItemInHandRenderer::renderItem(const Entity& entity, const ItemStack& item,
     if (item.isEmpty())
         return;
 
-    float fBrightness = entity.getBrightness(a);
 #ifdef FEATURE_GFX_SHADERS
     Color tileLightColor = Color::WHITE;
 #else
+    float fBrightness = entity.getBrightness(a);
     Color tileLightColor = Color(fBrightness, fBrightness, fBrightness);
 #endif
 
